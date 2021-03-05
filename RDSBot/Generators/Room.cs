@@ -2,12 +2,20 @@
 
 namespace RDSBot.Generators
 {
+    /// <summary>
+    /// Generates a room using a d75.
+    /// </summary>
     class Room : Generator
     {
         public override string Name { get; set; } = "Room Generator";
         public override string Command { get; set; } = "room";
 
-        public override string Output()
+        /// <summary>
+        /// Rolls a d75 and compares it against the room table.
+        /// </summary>
+        /// <returns>Returns the appropriate room based off the result of the d75.</returns>
+        /// <example>"30 (Boss)"</example>
+        public override string Output(string[] args)
         {
             Random random = new Random();
 
