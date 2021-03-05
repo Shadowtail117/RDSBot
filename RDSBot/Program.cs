@@ -40,6 +40,10 @@ namespace RDSBot
             await Task.Delay(-1);
         }
 
+        /// <summary>
+        /// Logs a message. Use this over <see cref="Console.WriteLine()"/> when possible.
+        /// </summary>
+        /// <param name="message">The message to be logged.</param>
         private static Task Log(LogMessage message)
         {
             switch (message.Severity)
