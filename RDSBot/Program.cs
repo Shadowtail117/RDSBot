@@ -134,6 +134,14 @@ namespace RDSBot
                             break;
                     }
                     break;
+                case "commands":
+                    string commands = "";
+                    foreach(Generator generator in Generator.generators)
+                    {
+                        commands += generator.Command + ", ";
+                    }
+                    output = "Available commands: " + commands[0..^2];
+                    break;
             }
 
             return textChannel.SendMessageAsync(output);
