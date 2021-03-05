@@ -100,7 +100,7 @@ namespace RDSBot
                 case "config":
                     if (arguments.Length < 1)
                     {
-                        output = "Please specify an argument!";
+                        output = "Please specify either get or set.";
                         break;
                     }
                     switch(arguments[0])
@@ -108,7 +108,7 @@ namespace RDSBot
                         case "set":
                             if(arguments.Length < 3)
                             {
-                                output = "Please specify at least three arguments!";
+                                output = "Please specify which config to set and what to set it with.";
                                 break;
                             }
                             switch(arguments[1])
@@ -122,7 +122,7 @@ namespace RDSBot
                         case "get":
                             if (arguments.Length < 2)
                             {
-                                output = "Please specify at least two arguments!";
+                                output = "Please specify which config to get.";
                                 break;
                             }
                             switch (arguments[1])
@@ -140,7 +140,7 @@ namespace RDSBot
                     {
                         commands += generator.Command + ", ";
                     }
-                    output = "Available commands: " + commands[0..^2];
+                    output = $"Available commands: version, commands, config, {commands[0..^2]}";
                     break;
             }
 
