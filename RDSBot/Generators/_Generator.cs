@@ -20,7 +20,7 @@ namespace RDSBot.Generators
         /// What to output to the user.
         /// </summary>
         /// <returns>A dice roll along with a description of the result.</returns>
-        public abstract string Output();
+        public abstract string Output(string[] args);
 
         /// <summary>
         /// A list of all generators.

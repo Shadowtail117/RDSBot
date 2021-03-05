@@ -88,7 +88,7 @@ namespace RDSBot
             {
                 if (command == generator.Command)
                 {
-                    output = $"{generator.Name} - {generator.Output()}";
+                    output = $"{generator.Name} - {generator.Output(arguments)}";
                     break;
                 }
             }

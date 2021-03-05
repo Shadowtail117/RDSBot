@@ -15,7 +15,7 @@ namespace RDSBot.Generators
         /// </summary>
         /// <returns>Returns the appropriate room based off the result of the d75.</returns>
         /// <example>"30 (Boss)"</example>
-        public override string Output()
+        public override string Output(string[] args)
         {
             Random random = new Random();
 
