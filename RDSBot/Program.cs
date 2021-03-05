@@ -24,7 +24,7 @@ namespace RDSBot
 
             AppDomain.CurrentDomain.ProcessExit += new EventHandler(OnExit);
 
-            Console.WriteLine($"RDS Bot version {config.version} starting up!\n");
+            Console.WriteLine($"RDS Bot version {Config.version} starting up!\n");
             new Program().MainAsync().GetAwaiter().GetResult();
         }
 
@@ -71,6 +71,8 @@ namespace RDSBot
 
             if (!(userMessage.Content.StartsWith(config.prefix))) return Task.CompletedTask;
 
+            Log(new LogMessage(LogSeverity.Info, $"{textChannel.Guild.Name} - {textChannel.Name} - {userMessage.Author}", userMessage.Content));
+
             string input = userMessage.Content;
 
             string command = input.Split(' ')[0].Substring(config.prefix.Length);
@@ -83,7 +85,51 @@ namespace RDSBot
                 if (command == generator.Command)
                 {
                     output = $"{generator.Name} - {generator.Output()}";
+                    break;
                 }
+            }
+            switch(command)
+            {
+                case "version":
+                    output = $"RDSBot is currently running version {Config.version}.";
+                    break;
+                case "config":
+                    if (arguments.Length < 1)
+                    {
+                        output = "Please specify an argument!";
+                        break;
+                    }
+                    switch(arguments[0])
+                    {
+                        case "set":
+                            if(arguments.Length < 3)
+                            {
+                                output = "Please specify at least three arguments!";
+                                break;
+                            }
+                            switch(arguments[1])
+                            {
+                                case "prefix":
+                                    config.prefix = arguments[2];
+                                    output = $"Set prefix to \"{config.prefix}\"!";
+                                    break;
+                            }
+                            break;
+                        case "get":
+                            if (arguments.Length < 2)
+                            {
+                                output = "Please specify at least two arguments!";
+                                break;
+                            }
+                            switch (arguments[1])
+                            {
+                                case "prefix":
+                                    output = $"Current prefix is \"{config.prefix}\".";
+                                    break;
+                            }
+                            break;
+                    }
+                    break;
             }
 
             return textChannel.SendMessageAsync(output);
