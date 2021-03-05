@@ -9,6 +9,11 @@ namespace RDSBot.Generators
         public override string Name { get; set; } = "Loot Table";
         public override string Command { get; set; } = "loot";
 
+        /// <summary>
+        /// Rolls either a d30 or a d76 based on <paramref name="args"/>.
+        /// </summary>
+        /// <param name="args">The first argument will be used to determine which loot table to use. Options are common, rare, and cursed.</param>
+        /// <returns>Return the result of the dice roll of the chosen loot table.</returns>
         public override string Output(string[] args)
         {
             Random random = new Random();
