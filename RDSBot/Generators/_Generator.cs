@@ -27,7 +27,8 @@ namespace RDSBot.Generators
         /// </summary>
         public static List<Generator> generators = new List<Generator>()
         {
-            new Room()
+            new Room(),
+            new Loot()
         };
     }
 }
