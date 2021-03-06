@@ -12,11 +12,13 @@ namespace RDSBot
     {
         private DiscordSocketClient client;
         static Config config = new Config();
+        private static bool shouldSave = true;
 
         static void Main(string[] args)
         {
             if(!config.Load(out config))
             {
+                shouldSave = false;
                 Console.WriteLine("Couldn't load config. Aborting. Press any key to exit.");
                 Console.ReadKey();
                 return;
@@ -79,7 +81,7 @@ namespace RDSBot
 
             string input = userMessage.Content;
 
-            string command = input.Split(' ')[0].Substring(config.prefix.Length);
+            string command = input.Split(' ')[0][config.prefix.Length..];
             string[] arguments = input.Split(' ')[1..];
 
             string output = "Invalid command!";
@@ -149,6 +151,7 @@ namespace RDSBot
 
         private static void OnExit(object sender, EventArgs e)
         {
+            if (!shouldSave) return;
             Console.WriteLine("\nShutting down!");
             config.Save();
         }

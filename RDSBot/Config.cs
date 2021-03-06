@@ -68,6 +68,11 @@ namespace RDSBot
                 return false;
             }
             string token = File.ReadAllText(Path.Combine(saveDirectory, @"token.txt"));
+            if (token == "Put your token here") //The default value
+            {
+                Console.WriteLine("Token has not been set! Aborting.");
+                return false;
+            }
             config.token = token;
             return true; //We cannot check if the token is actually valid here
         }
